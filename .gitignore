@@ -1,0 +1,68 @@
+# -- Symfony -----------------------------------------
+
+/.web-server-pid
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+!var/jwt
+/vendor/
+/web/bundles/
+/web/js/
+
+# -- Composer -----------------------------------------
+
+composer.phar
+
+# -- PHPUnit ------------------------------------------
+
+app/phpunit.xml
+
+# -- Editores -----------------------------------------
+
+# phpstorm
+
+.idea
+
+# textmate
+*.tmproj
+*.tmproject
+tmtags
+
+# sublimetext
+
+/*.sublime-project
+*.sublime-workspace
+
+# -- Sistemas Operativos ------------------------------
+
+# Windows
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN
+
+# Linux
+
+!.gitignore
+!.htaccess
+
+# Mac OS X
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+.Spotlight-V100
+.Trashes

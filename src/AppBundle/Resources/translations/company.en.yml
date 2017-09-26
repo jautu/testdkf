@@ -1,0 +1,13 @@
+button:
+    edit: Edit
+    new: New
+    save: Save
+
+field:
+    company: Company
+    id: ID
+    name: Name
+
+title: Companies
+title_edit: Edit company
+title_new: New company

@@ -1,0 +1,58 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block contentheader %}
+    {{ 'title' | trans({}, 'company') }}
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="pull-right">
+                <a type="button"
+                   class="btn btn-block btn-primary"
+                   href="{{ path('app_company_new') }}">
+                    {{ 'button.new' | trans({}, 'company') | raw }}
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="js-table table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ 'field.id' | trans({}, 'company') | raw }}</th>
+                            <th>{{ 'field.name' | trans({}, 'company') | raw }}</th>
+                            <th class="no-sort"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in dataList %}
+                                <tr>
+                                    <td>{{ data.id | raw }}</td>
+                                    <td>{{ data.name | raw }}</td>
+                                    <td class="no-sort">
+                                        <a type="button"
+                                           class="btn btn-default"
+                                           href="{{ path('app_company_edit', { id: data.id }) }}">
+                                            {{ 'button.edit' | trans({}, 'company') | raw }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            dkfCompanyLanding = dokify.CompanyLanding();
+            dkfCompanyLanding.init();
+        });
+    </script>
+{% endblock %}

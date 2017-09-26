@@ -1,0 +1,56 @@
+<div class="form-horizontal box-body">
+    <div class="row">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">
+                {{ 'field.agreement' | trans({}, 'agreement') | raw }}
+            </label>
+            <div class="col-sm-9">
+                <span class="form-control">{{ dataAgreement.name }}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">
+                {{ 'field.company' | trans({}, 'agreement') | raw }}
+            </label>
+            <div class="col-sm-9">
+                <span class="form-control">{{ dataAgreement.nameCompany }}</span>
+            </div>
+        </div>
+    </div>
+    {% if dataRelations | length > 0 %}
+        <hr />
+        <div class="row">
+            {% set counter = 0 %}
+            {% for relation in dataRelations %}
+                {% if relation.idRelation == 2 %}
+                    {% set counter = counter + 1 %}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            {{ 'field.company_provider' | trans({}, 'agreement') | raw }} {{ counter }}
+                        </label>
+                        <div class="col-sm-9">
+                            <span class="form-control">{{ relation.nameCompany }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <hr />
+        <div class="row">
+            {% set counter = 0 %}
+            {% for relation in dataRelations %}
+                {% if relation.idRelation == 1 %}
+                    {% set counter = counter + 1 %}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            {{ 'field.company_customer' | trans({}, 'agreement') | raw }} {{ counter }}
+                        </label>
+                        <div class="col-sm-9">
+                            <span class="form-control">{{ relation.nameCompany }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

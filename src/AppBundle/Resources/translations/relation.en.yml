@@ -1,0 +1,15 @@
+button:
+    apply: Apply
+    clear: Clear filters
+    close: Close
+    edit: Edit
+
+field:
+    agreement: Agreement
+    company: Company
+    company_related: Related company
+    id: ID
+    name: Name
+    relation: Relation
+
+title: Relations

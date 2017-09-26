@@ -1,0 +1,30 @@
+button:
+    apply: Apply
+    cancel: Cancel
+    clear: Clear filters
+    close: Close
+    delete: Delete
+    edit: Edit
+    new: New
+    ok: OK
+    save: Save
+
+field:
+    agreement: Agreement
+    company: Company
+    company_customer: Customer
+    company_provider: Provider
+    id: ID
+    name: Name
+    relation: Relation
+    relation_id: Relation ID
+
+popup:
+    delete:
+        description: Are you sure to delete this item?
+        title: Delete relation
+
+title: Agreements
+title_detail: Agreement
+title_edit: Edit agreement
+title_new: New Agreement

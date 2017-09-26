@@ -1,0 +1,138 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block contentheader %}
+    {{ 'title' | trans({}, 'agreement') }}
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="pull-right">
+                <a type="button"
+                   class="btn btn-block btn-primary"
+                   href="{{ path('app_agreement_new') }}">
+                    {{ 'button.new' | trans({}, 'agreement') | raw }}
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>{{ 'field.company' | trans({}, 'agreement') | raw }}</label>
+                        <select class="js-company selectpicker form-control"
+                                data-ajax="{{ path('app_common_company', {type: 'company'}) }}"
+                                data-rel=".js-company-label">
+                        </select>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label>{{ 'field.company_provider' | trans({}, 'agreement') | raw }}</label>
+                        <select class="js-company-provider selectpicker form-control"
+                                data-ajax="{{ path('app_common_company', {type: 'provider'}) }}"
+                                data-selected-text-format="count"
+                                data-rel=".js-company-provider-label"
+                                multiple>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'field.company_customer' | trans({}, 'agreement') | raw }}</label>
+                        <select class="js-company-customer selectpicker form-control"
+                                data-ajax="{{ path('app_common_company', {type: 'customer'}) }}"
+                                data-selected-text-format="count"
+                                data-rel=".js-company-customer-label"
+                                multiple>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button"
+                                class="js-btn-filter btn btn-block btn-primary"
+                                data-ajax-list="{{ path('app_agreement_filter') }}">
+                            {{ 'button.apply' | trans({}, 'agreement') | raw }}
+                        </button>
+                        <button type="button"
+                                class="js-btn-clear btn btn-block btn-default">
+                            {{ 'button.clear' | trans({}, 'agreement') | raw }}
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>{{ 'field.company' | trans({}, 'agreement') | raw }}</label>
+                            <p><span class="js-filter-label js-company-label">-</span></p>
+                        </div>
+                        <div class="col-xs-4">
+                            <label>{{ 'field.company_provider' | trans({}, 'agreement') | raw }}</label>
+                            <p><span class="js-filter-label js-company-provider-label">-</span></p>
+                        </div>
+                        <div class="col-xs-4">
+                            <label>{{ 'field.company_customer' | trans({}, 'agreement') | raw }}</label>
+                            <p><span class="js-filter-label js-company-customer-label">-</span></p>
+                        </div>
+                    </div>
+                    <hr />
+                    <table class="js-table table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ 'field.id' | trans({}, 'agreement') | raw }}</th>
+                            <th>{{ 'field.name' | trans({}, 'agreement') | raw }}</th>
+                            <th class="no-sort"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in dataList %}
+                                <tr>
+                                    <td>{{ data.id | raw }}</td>
+                                    <td>{{ data.name | raw }}</td>
+                                    <td class="no-sort">
+                                        <button type="button"
+                                                class="js-btn-view btn btn-default"
+                                                data-ajax="{{ path('app_agreement_detail', { id: data.id }) }}"
+                                                data-target="#js-popup-agreement"
+                                                data-toggle="modal">
+                                            {{ 'button.view' | trans({}, 'company') | raw }}
+                                        </button>
+                                        <a type="button"
+                                           class="btn btn-block btn-default"
+                                           href="{{ path('app_agreement_edit', { id: data.id }) }}">
+                                            {{ 'button.edit' | trans({}, 'company') | raw }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="js-popup-agreement" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="{{ 'button.close' | trans({}, 'agreement') | raw }}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        {{ 'title_detail' | trans({}, 'agreement') | raw }}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            dkfAgreementLanding = dokify.AgreementLanding(dkfLayout);
+            dkfAgreementLanding.init();
+        });
+    </script>
+{% endblock %}

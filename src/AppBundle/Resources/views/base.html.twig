@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Test Dokify!{% endblock %}</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/ionicons.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select-custom.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/AdminLTE.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/_all-skins.min.css') }}">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Google Font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            {% include 'AppBundle:Common:header.html.twig' %}
+            {% include 'AppBundle:Common:menu.html.twig' %}
+            <div class="content-wrapper">
+                <section class="content-header">
+                    <h1>{% block contentheader %}{% endblock %}</h1>
+                </section>
+                <section class="content js-page">
+                    <div class="js-notification"></div>
+                    {% block content %}{% endblock %}
+                </section>
+                <div class="clearfix"></div>
+            </div>
+            {% include 'AppBundle:Common:footer.html.twig' %}
+        </div>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
+        <script src="{{ asset('js/fastclick.js') }}"></script>
+        <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-select.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-select-ajax.js') }}"></script>
+        <script src="{{ asset('js/adminlte.min.js') }}"></script>
+        <script src="{{ asset('js/demo.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/agreement-form.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/agreement-landing.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/company-form.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/company-landing.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/relation-landing.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/layout.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                $(document).ajaxError(function (event, jqXHR) {
+                    if (403 === jqXHR.status) {
+                        window.location.reload();
+                    }
+                });
+
+                $('.sidebar-menu').tree();
+
+                dkfLayout = new dokify.Layout();
+                dkfLayout.init();
+
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    dkfLayout.notification('success', '{{ flashMessage | trans({}, 'messages') }}');
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    dkfLayout.notification('error', '{{ flashMessage | trans({}, 'messages') }}');
+                {% endfor %}
+            })
+        </script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

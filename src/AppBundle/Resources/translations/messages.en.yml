@@ -1,0 +1,13 @@
+agreement:
+    create:
+        ok: 'This agreement has been successfully added.'
+    not_exit: 'This agreement does not exist.'
+    update:
+        ok: 'This agreement has been successfully updated.'
+
+company:
+    create:
+        ok: 'Your company has been successfully added.'
+    not_exit: 'This company does not exist.'
+    update:
+        ok: 'Your company has been successfully updated.'

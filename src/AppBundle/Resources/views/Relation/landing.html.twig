@@ -1,0 +1,103 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block contentheader %}
+    {{ 'title' | trans({}, 'relation') }}
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <div class="box-header with-border">
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>{{ 'field.company' | trans({}, 'relation') | raw }}</label>
+                        <select class="js-company selectpicker form-control"
+                                data-ajax="{{ path('app_common_company', {type: 'company'}) }}"
+                                data-rel=".js-company-label">
+                        </select>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label>{{ 'field.company_related' | trans({}, 'relation') | raw }}</label>
+                        <select class="js-company-related selectpicker form-control"
+                                data-ajax="{{ path('app_common_company', {type: 'relation'}) }}"
+                                data-selected-text-format="count"
+                                data-rel=".js-company-related-label"
+                                multiple>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'field.relation' | trans({}, 'relation') | raw }}</label>
+                        <select class="js-relation selectpicker form-control"
+                                data-live-search="false"
+                                data-rel=".js-relation-label">
+                            <option></option>
+                            {% for relation in dataRelation %}
+                                <option value="{{ relation.id }}">{{ relation.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button"
+                                class="js-btn-filter btn btn-block btn-primary"
+                                data-ajax-list="{{ path('app_relation_filter') }}">
+                            {{ 'button.apply' | trans({}, 'relation') | raw }}
+                        </button>
+                        <button type="button"
+                                class="js-btn-clear btn btn-block btn-default">
+                            {{ 'button.clear' | trans({}, 'relation') | raw }}
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>{{ 'field.company' | trans({}, 'relation') | raw }}</label>
+                            <p><span class="js-filter-label js-company-label">-</span></p>
+                        </div>
+                        <div class="col-xs-4">
+                            <label>{{ 'field.company_related' | trans({}, 'relation') | raw }}</label>
+                            <p><span class="js-filter-label js-company-related-label">-</span></p>
+                        </div>
+                        <div class="col-xs-4">
+                            <label>{{ 'field.relation' | trans({}, 'relation') | raw }}</label>
+                            <p><span class="js-filter-label js-relation-label">-</span></p>
+                        </div>
+                    </div>
+                    <hr />
+                    <table class="js-table table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ 'field.name' | trans({}, 'relation') | raw }}</th>
+                            <th>{{ 'field.company' | trans({}, 'relation') | raw }}</th>
+                            <th>{{ 'field.relation' | trans({}, 'relation') | raw }}</th>
+                            <th>{{ 'field.company_related' | trans({}, 'relation') | raw }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in dataList %}
+                                <tr>
+                                    <td>{{ data.name | raw }}</td>
+                                    <td>{{ data.nameCompany | raw }}</td>
+                                    <td>{{ data.nameRelation | raw }}</td>
+                                    <td>{{ data.nameCompanyRelation | raw }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            dkfRelationLanding = dokify.RelationLanding(dkfLayout);
+            dkfRelationLanding.init();
+        });
+    </script>
+{% endblock %}
